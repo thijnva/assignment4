@@ -52,7 +52,10 @@ One of the variables in the dataset is `revolutions`, the number of revolutions,
 ```{r}
 library(modelsummary); library(tidyverse)
 
-# write your code here
+GrowthSW$treat <- ifelse(GrowthSW$revolutions > 0, "Yes", "No")
+
+datasummary(Mean + Median + SD + Min + Max ~ treat * (growth + rgdp60),
+            data = GrowthSW)
 ```
 
 **Designated place**: type one or two sentences describing this table of a fellow student below. For example, comment on the mean and median growth of both groups. Then stage, commit and push it to their github repository. 
