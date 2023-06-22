@@ -101,7 +101,7 @@ Now, we put the models in a list, and see what `modelsummary` gives us:
 
 ```{r}
 list(model1, model2, model3, model4) |>
-  modelsummary(stars=T, statistic = NULL, gof_map = c("nobs", "r.squared")
+  modelsummary(stars=T, gof_map = c("nobs", "r.squared")
 ) 
 
 ```
@@ -115,8 +115,8 @@ list(model1, model2, model3, model4) |>
 ```{r}
 library(kableExtra)
 list(model1, model2, model3, model4) |>
-  modelsummary(stars=T, gof_map = c("nobs", "r.squared")) 
-# use functions from modelsummary to edit this table
+  modelsummary(stars=T, gof_map = c("nobs", "r.squared"))
+
 ```
 
 **Question 3.8**: Write a piece of code that exports this table (without the formatting) to a Word document. 
