@@ -32,7 +32,7 @@ This interpretation will not be graded, but a Github shows the contributors to a
 
 **Question 1.1**: Fill in the __github username__ of the class mate to whose repository you have contributed. 
 
-[Fill in here]
+[pienoudehengel]
 
 ### Part 2: Analyzing various linear models
 
@@ -74,7 +74,7 @@ t.test(growth ~ treat, data = GrowthSW)
 
 **Question 3.2**: What is the $p$-value of the test, and what does that mean? Write down your answer below.
 
-The p-value is 0.06781 
+The p-value is 0.06781. Meaning that if the difference in means between the group with 0 revolutions and the group with more than 0 revolutions is not equal to 0 (the null hypothesis) is true, than there is a 6.781% chance of obtaining a test statistic as the one observed. 
 
 We can also control for other factors by including them in a linear model, for example:
 
@@ -84,7 +84,7 @@ $$
 
 **Question 3.3**: What do you think the purpose of including the variable `rgdp60` is? Look at `?GrowthSW` to find out what the variables mean. 
 
-The rgdp60 is the value of GDP per capita in 1960, converted to 1960 US dollars. 
+The rgdp60 is the value of GDP per capita in 1960, converted to 1960 US dollars. This deals with the different currencies used in every country, because when comparing countries you need to look at the economic conditions of each country relative to a common currency. It also helps to see if the starting economical conditions influence the observed differences in growth rates between countries with revolutions or without revolutions. 
 
 We now want to estimate a stepwise model. Stepwise means that we first estimate a univariate regression $\text{growth}_i = \beta_0 + \beta_1 \cdot \text{treat}_i + \epsilon_i$, and in each subsequent model, we add one control variable. 
 
@@ -110,19 +110,24 @@ list(model1, model2, model3, model4) |>
 
 **Question 3.6**: According to this analysis, what is the main driver of economic growth? Why?
 
+The tradeshare is the highest coefficient, indicating that an increase in trade share has a positive effect on the economic growth. This suggest that countries who tend to trade more with other countries have a higher level of economic growth. 
+
 **Question 3.7**: In the code chunk below, edit the table such that the cells (including standard errors) corresponding to the variable `treat` have a red background and white text. Make sure to load the `kableExtra` library beforehand.
 
 ```{r}
 library(kableExtra)
 list(model1, model2, model3, model4) |>
-  modelsummary(stars=T, gof_map = c("nobs", "r.squared"))
+  modelsummary(stars=T, gof_map = c("nobs", "r.squared")) |>
+  row_spec(3:4, background = "red", color = "white")
 
 ```
 
 **Question 3.8**: Write a piece of code that exports this table (without the formatting) to a Word document. 
 
 ```{r}
-
+install.packages('flextable')
+list(model1, model2, model3, model4) |>
+  modelsummary(stars = T, gof_map = c("nobs", "r.squared"), output = 'table.docx')
 ```
 
 ## The End
